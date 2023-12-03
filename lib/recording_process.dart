@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable, empty_catches
 
 import 'dart:async';
 import 'dart:convert';
@@ -68,7 +68,7 @@ class _RecordingProcessState extends State<RecordingProcess> {
     getAge();
     openDb();
     AwesomeNotifications().initialize(
-      'resource://drawable/ic_stat_name',
+      'resource://drawable/res_ic_stat_name',
       [
         NotificationChannel(
           channelKey: 'basic',
@@ -182,21 +182,16 @@ class _RecordingProcessState extends State<RecordingProcess> {
 
   notification_sender() async {
     var decoded_response = jsonDecode(response);
-    print(decoded_response);
     if (decoded_response['response'] == 'Required') {
-      print('Required 2');
       notification_for_required();
     } else if (decoded_response == 'Recommended') {
-      print('Recommended 2');
       notification_for_recommended();
     } else {
-      print('Not sleeping');
     }
   }
 
   Future<Database> openDb() async {
     final databasesPath = await getDatabasesPath();
-    print(databasesPath);
     final path = join(databasesPath, 'my_database.db');
 
     return openDatabase(path, onCreate: (db, version) {
@@ -269,7 +264,6 @@ class _RecordingProcessState extends State<RecordingProcess> {
   }
 
   void onError(Object error) {
-    print(error.toString());
     _isRecording = false;
   }
 
@@ -277,7 +271,6 @@ class _RecordingProcessState extends State<RecordingProcess> {
     try {
       _noiseSubscription = _noiseMeter.noiseStream.listen(onData);
     } catch (err) {
-      print(err);
     }
   }
 
@@ -292,14 +285,10 @@ class _RecordingProcessState extends State<RecordingProcess> {
         _isRecording = false;
       });
     } catch (err) {
-      print('stopRecorder error: $err');
     }
   }
 
   Future<void> sendValue(avgValdB, rows, val_age) async {
-    print(avgValdB);
-    print(rows);
-    print(val_age);
     final url =
         "https://quietzone.pythonanywhere.com/response?avg_val_dB=$avgValdB&k=$rows&val_age=$val_age";
     response = await getData(url);

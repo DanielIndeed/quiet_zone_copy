@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, duplicate_ignore
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore, use_build_context_synchronously, prefer_typing_uninitialized_variables
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home.dart';
 import 'dart:ui' as ui;
@@ -94,10 +94,8 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () async {
                         permission_requests();
                         setAge(int.parse(ageController.text));
-                        print(val_age);
                         await getAge();
                         if (val_age != null) {
-                          print(val_age);
                           Navigator.push(
                             this.context,
                             MaterialPageRoute(
